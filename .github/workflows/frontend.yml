@@ -1,0 +1,18 @@
+# unit testing
+# build and push
+# deploy
+name: Frontend Pipeline
+on: [push]
+jobs:
+    Unit_Testing:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+            - name: Set up Node js
+              uses: actions/setup-node@v3
+              with:
+                node-version: '20'
+            - run: npm --version
+            - run: node --version
+    
