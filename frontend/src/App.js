@@ -33,7 +33,7 @@ function App() {
         </h1>
         <h2 style={{color: "green"}}>{response}</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} data-testid="form">
           <div>
             <input type="text" id="nameInput" placeholder="Enter your name ..." required />
             <button type='submit'>Submit</button>

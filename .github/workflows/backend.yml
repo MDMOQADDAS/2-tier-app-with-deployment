@@ -12,6 +12,7 @@ jobs:
                 node-version: '20'
             - run: |
                 cd backend
+                npm i
                 npm test
     Build_And_Push:
         runs-on: ubuntu-latest
