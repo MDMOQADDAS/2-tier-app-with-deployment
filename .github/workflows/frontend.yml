@@ -29,6 +29,7 @@ jobs:
             - name: Build Docker Image and Push
               run: |
                 cd frontend
+                CI=false
                 npm i
                 npm run build 
                 docker --version
