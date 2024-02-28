@@ -5,7 +5,7 @@ RUN apk update && \
 	apk add nodejs npm && \
 	npm i
 
-COPY . .
+COPY ./frontend .
 RUN npm run build
 
 
