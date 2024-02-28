@@ -18,6 +18,8 @@ jobs:
     Build_And_Push:
         runs-on: ubuntu-latest
         needs: Unit_Testing
+        env:
+          TAG: ${{ github.sha }}-$(uuidgen | cut -d'-' -f1)
         steps:
             - name: Checkout Code
               uses: actions/checkout@v4
@@ -26,11 +28,15 @@ jobs:
             - name: Set up Docker
               uses: docker/setup-buildx-action@v1
 
+            - name: Docker Login
+              run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
             - name: Build Docker Image and Push
               run: |
                 cd frontend
                 CI=false
                 npm i
                 npm run build 
-                docker --version
-                docker ps
+                docker build -t ${{ secrets.DOCKER_USERNAME }}/${{var.IMAGE_NAME}}:$TAG .
+                docker tag ${{ secrets.DOCKER_USERNAME }}/${{var.IMAGE_NAME}}:$TAG ${{ secrets.DOCKER_USERNAME }}/${{var.IMAGE_NAME}}:latest
+                docker push ${{ secrets.DOCKER_USERNAME }}/${{var.IMAGE_NAME}}:$TAG
+                docker push ${{ secrets.DOCKER_USERNAME }}/${{var.IMAGE_NAME}}:latest
