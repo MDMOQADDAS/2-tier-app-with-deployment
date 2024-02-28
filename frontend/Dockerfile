@@ -1,6 +1,6 @@
 FROM alpine AS build  
 WORKDIR /app
-COPY package*.json ./
+COPY ./frontend/package*.json ./
 RUN apk update && \
 	apk add nodejs npm && \
 	npm i
