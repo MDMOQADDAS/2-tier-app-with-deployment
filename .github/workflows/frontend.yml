@@ -27,20 +27,22 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Set up Node js
-        uses: actions/setup-node@v4
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v1
+      
+      -
+          name: Login to Docker Hub
+          uses: docker/login-action@v3
+          with:
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Docker Login
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-      - name: Build Docker Image and Push
-        run: |
-          cd frontend
-          CI=false
-          npm i
-          npm run build 
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:$TAG .
-          docker tag ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:$TAG ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:$TAG
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
+      -
+          name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v3
+      -
+            name: Build and push
+            uses: docker/build-push-action@v5
+            with:
+              context: .
+              file: ./frontend/Dockerfile
+              push: true
+              tags: ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
