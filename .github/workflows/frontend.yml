@@ -42,4 +42,4 @@ jobs:
           context: .
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/reactdemo:$TAG
+          tags: ${{ secrets.DOCKER_USERNAME }}/reactdemo:${{ env.TAG }}
