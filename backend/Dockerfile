@@ -6,7 +6,7 @@ COPY ./backend .
 
 RUN apk add --no-cache  nodejs npm && \
         rm -rf /var/cache/apk/* && \
-        npm i && \
+        npm i 
         
 
 
