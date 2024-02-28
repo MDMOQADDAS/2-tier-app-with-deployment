@@ -15,7 +15,7 @@ variable "zone" {
 
 variable "instance_name" {
   description = "The name of the frontend VM instance"
-  default     = "frontend-instance"
+  default     = "app-instance"
 }
 
 variable "machine_type" {
@@ -25,7 +25,7 @@ variable "machine_type" {
 
 variable "image" {
   description = "The image for the frontend VM instance"
-  default     = "ubuntu-os-cloud/ubuntu-2004-lts"
+  default     = "debian-cloud/debian-11"
 }
 
 variable "bucket_name" {

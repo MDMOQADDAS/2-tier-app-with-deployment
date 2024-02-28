@@ -10,7 +10,7 @@ terraform {
 }
 
 
-resource "google_compute_instance" "frontend_vm" {
+resource "google_compute_instance" "applicationdemo" {
   name         = var.instance_name
   machine_type = var.machine_type
   zone         = var.zone
@@ -28,5 +28,5 @@ resource "google_compute_instance" "frontend_vm" {
     }
   }
 
-  metadata_startup_script = file("./terraform/frontend/startup_script.sh")
+  metadata_startup_script = file("./terraform/startup_script.sh")
 }
