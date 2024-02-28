@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  const [name, setName] = useState('');
-  const [response, setResponse] = useState('');
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();

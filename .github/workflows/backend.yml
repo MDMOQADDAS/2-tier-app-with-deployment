@@ -10,7 +10,8 @@ jobs:
               uses: actions/setup-node@v4
               with:
                 node-version: '20'
-            - run: |
+            - name: Test Cases
+              run: |
                 cd backend
                 npm i
                 npm test
