@@ -28,9 +28,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Hello 👋🏼 <span>{response}</span>
-        </p>
+        <h1>
+          Hello 👋🏼 
+        </h1>
+        <h2 style={{color: "green"}}>{response}</h2>
 
         <form onSubmit={handleSubmit}>
           <div>
